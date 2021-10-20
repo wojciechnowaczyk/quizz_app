@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import InputWithLabel from '../components/inputWithLabel';
 import Logotype from '../assets/img/logo_expansio.png';
 import RightArrow from '../assets/img/right-arrow.png';
 
@@ -11,6 +12,7 @@ const  MainScreen = () => {
         <MainBox>
             <Logo src={Logotype}/>
             <InnerBox>
+                <InputWithLabel />
                 <Arrow onClick={()=>handleArrowClick()}>
                     <img src={RightArrow} alt=""></img>
                 </Arrow>
@@ -35,6 +37,8 @@ const InnerBox = styled.div`
     background-color: rgb(44,40,56);
     border-radius: 20px;
     position: relative;
+    padding: 30px;
+    box-sizing: border-box;
 `
 const Logo = styled.img`
     width: 200px;

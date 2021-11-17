@@ -7,6 +7,9 @@ import RightArrow from '../assets/img/right-arrow.png';
 const  MainScreen = () => {
     const handleArrowClick = () => {
         console.log('arrow click');
+        fetch('http://localhost:3001/login', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify({login: "user", password: "password"})})
+        .then(response => response.json())
+        .then(data => console.log(data))
     }
     return (
         <MainBox>

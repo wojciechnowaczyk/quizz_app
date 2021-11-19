@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import InputWithLabel from '../components/inputWithLabel';
 import Logotype from '../assets/img/logo_expansio.png';
 import RightArrow from '../assets/img/right-arrow.png';
 
 const  MainScreen = () => {
     const handleArrowClick = () => {
         console.log('arrow click');
+        fetch('http://localhost:3001/login', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify({login: "user", password: "password"})})
+        .then(response => response.json())
+        .then(data => console.log(data))
     }
     return (
         <MainBox>
             <Logo src={Logotype}/>
             <InnerBox>
+                <InputWithLabel />
                 <Arrow onClick={()=>handleArrowClick()}>
                     <img src={RightArrow} alt=""></img>
                 </Arrow>
@@ -35,6 +40,8 @@ const InnerBox = styled.div`
     background-color: rgb(44,40,56);
     border-radius: 20px;
     position: relative;
+    padding: 30px;
+    box-sizing: border-box;
 `
 const Logo = styled.img`
     width: 200px;

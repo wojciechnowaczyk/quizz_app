@@ -1,8 +1,11 @@
 import React from 'react';
+import DashboardLayout from '../components/dashboardLayout';
 
 const SeeFulffiledQuizzesScreen = () =>{
     return(
-        <p>See Fullfiled Quizzes Screen</p>
+        <DashboardLayout>
+            <p>See Fullfiled Quizzes Screen</p>
+        </DashboardLayout>
     )
 }
 

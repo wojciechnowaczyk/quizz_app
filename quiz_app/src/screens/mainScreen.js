@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import InputWithLabel from '../components/inputWithLabel';
 import Logotype from '../assets/img/logo_expansio.png';
 import RightArrow from '../assets/img/right-arrow.png';
+import palette from '../theme/colors';
 
 const  MainScreen = () => {
     const handleArrowClick = () => {
@@ -28,7 +29,7 @@ const MainBox = styled.div`
     width: 100%;
     height: 100vh;
     background: rgb(2,0,36);
-    background: linear-gradient(312deg, rgba(2,0,36,1) 0%, rgba(0,218,191,1) 70%); 
+    background: ${palette.background}; 
     display: flex;
     align-items: center;
     justify-content: center;

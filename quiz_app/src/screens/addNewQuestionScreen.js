@@ -7,11 +7,11 @@ const AddNewQuestionScreen = () =>{
     const [answers, setAnswers] = useState([]);
     const [rightAnswerId, setRightAnswerId] = useState(null);
     const [time, setTime] = useState(0);
+    const [questionsToDisplay, setQuestionsToDisplay] = useState([]);
     const handleSetQuestion = (event) => {
         setQuestion(event.target.value);
         event.preventDefault();
     }
-    const [questionsToDisplay, setQuestionsToDisplay] = useState([]);
     const handleSetAnswer = (id, event) => {
         if(answers.some(el=> el.id === id)){
             const answerIndex = answers.findIndex(el => el.id === id);
@@ -44,14 +44,29 @@ const AddNewQuestionScreen = () =>{
         }
         fetch('http://localhost:3001/addQuestion', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify(objectToSend)})
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => console.log(data.questions))
         .catch(err => console.log("error:" +err))
+    }
+
+    const displayQuestions = () => {
+        console.log(questionsToDisplay);
+        if(questionsToDisplay.questions.length >0){
+            return(
+                <>
+                    {questionsToDisplay.questions.map(question => {
+                        return(
+                            <p>{question?.question}</p>
+                        )
+                    })}
+                </>
+            )
+        }
     }
 
     const fetchQuestionsToDisplay = () => {
         fetch('http://localhost:3001/dashboard/questions', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "GET", mode: "cors"})
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => setQuestionsToDisplay(data))
         .catch(err => console.log("error:" +err))
     }
 
@@ -74,6 +89,7 @@ const AddNewQuestionScreen = () =>{
             <input  id="time" name="time" onChange={(e)=>setTime(e.target.value)}/>
             <br/>
             <Button onPress={handleSaveData} title="Save"/>
+            {displayQuestions()}
         </DashboardLayout>
     )
 }

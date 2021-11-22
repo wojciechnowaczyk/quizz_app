@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import DashboardLayout from '../components/dashboardLayout';
 import Button from '../components/button';
 
@@ -11,6 +11,7 @@ const AddNewQuestionScreen = () =>{
         setQuestion(event.target.value);
         event.preventDefault();
     }
+    const [questionsToDisplay, setQuestionsToDisplay] = useState([]);
     const handleSetAnswer = (id, event) => {
         if(answers.some(el=> el.id === id)){
             const answerIndex = answers.findIndex(el => el.id === id);
@@ -46,6 +47,17 @@ const AddNewQuestionScreen = () =>{
         .then(data => console.log(data))
         .catch(err => console.log("error:" +err))
     }
+
+    const fetchQuestionsToDisplay = () => {
+        fetch('http://localhost:3001/dashboard/questions', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "GET", mode: "cors"})
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log("error:" +err))
+    }
+
+    useEffect(()=>{
+        fetchQuestionsToDisplay();
+    }, [])
     return(
         <DashboardLayout>
             <p>AddNewQuestionScreen</p>

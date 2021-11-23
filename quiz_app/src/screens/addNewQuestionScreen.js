@@ -33,6 +33,20 @@ const AddNewQuestionScreen = () =>{
         event.preventDefault();
     }
 
+    const deleteQuestion = (id) => {
+        console.log(id);
+        fetch(`http://localhost:3002/dashboard/questions/${id}`, {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "DELETE", mode: "cors"})
+        .then(response => response.json())
+        .then(res => {
+            const index = questionsToDisplay.findIndex(el => el._id === res._id);
+            const newArr1 = questionsToDisplay.slice(0, index);
+            const newArr2 = questionsToDisplay.slice(index+1);
+            const newArr = newArr1.concat(newArr2);
+            setQuestionsToDisplay(newArr);
+        })
+        .catch(err => console.log("error:" +err))
+    }
+
     const handleSaveData = () => {
         const objectToSend = {
             date: new Date(),
@@ -53,7 +67,10 @@ const AddNewQuestionScreen = () =>{
                 <>
                     {questionsToDisplay.map(question => {
                         return(
-                            <p key={question._id}>{question?.question}</p>
+                            <div key={question._id}>
+                                <p >{question?.question}</p>
+                                <Button onPress={()=>deleteQuestion(question._id)} title="Delete"/>
+                            </div>
                         )
                     })}
                 </>

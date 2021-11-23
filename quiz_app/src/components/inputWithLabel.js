@@ -1,8 +1,11 @@
 import React from 'react';
 
-const InputWithLabel = () => {
+const InputWithLabel = ({label, id,onChange}) => {
     return(
-        <div>InputWithLabel</div>
+        <>
+            <p>{label}</p>
+            <input  id={id} name={id} onChange={(e) => onChange(e.target.value)}/>
+        </>
     )
 }
 

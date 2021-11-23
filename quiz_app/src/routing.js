@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import Dashboard from './screens/dashboard';
 import MainScreen from './screens/mainScreen';
-import ManageUsersScreen from './screens/manageUsersScreen';
+import ManageUsersScreen from './screens/dashboard/manageUsers';
 import SeeFulffiledQuizzesScreen from './screens/seeFulfilledQuizzesScreen';
 import AddNewQuestionScreen from './screens/addNewQuestionScreen';
 

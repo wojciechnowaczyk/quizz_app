@@ -1,12 +1,10 @@
 import React, {useState} from "react";
-import styled from  "styled-components";
 import InputWithLabel from "../../../../components/inputWithLabel";
 import Button from "../../../../components/button";
 
-const AddUserForm = () => {
+const AddUserForm = ({usersList, setUsersList}) => {
     const [login, setLogin] = useState('');
     const [code, setCode] = useState('');
-    const [usersListToDisplay, setUsersListToDisplay] = useState([])
 
     const handleSaveData = () => {
         const objectToSend = {
@@ -16,7 +14,7 @@ const AddUserForm = () => {
         }
         fetch('http://localhost:3002/dashboard/addUser', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify(objectToSend)})
         .then(response => response.json())
-        .then(res => setUsersListToDisplay(usersListToDisplay.concat([{_id: res.id,...objectToSend}])))
+        .then(res => setUsersList(usersList.concat([{_id: res._id,...objectToSend}])))
         .catch(err => console.log("error:" +err))
     }
     return(

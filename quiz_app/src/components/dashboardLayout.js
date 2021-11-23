@@ -37,7 +37,7 @@ const Logotype = styled.img`
 
 const BodyContainer  = styled.div`
     width: 80%;
-    height: 85vh;
+    min-height: 85vh;
     background: ${palette.background}; 
     padding-left: 10%;
     padding-right: 10%;
@@ -48,7 +48,7 @@ const BodyContainer  = styled.div`
 `
 
 const ContentBox = styled.div`
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.6);
     width: 90%;
     height: fit-content;
     padding: 5%;

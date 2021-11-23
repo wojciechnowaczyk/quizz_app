@@ -34,7 +34,6 @@ const AddNewQuestionScreen = () =>{
     }
 
     const deleteQuestion = (id) => {
-        console.log(id);
         fetch(`http://localhost:3002/dashboard/questions/${id}`, {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "DELETE", mode: "cors"})
         .then(response => response.json())
         .then(res => {

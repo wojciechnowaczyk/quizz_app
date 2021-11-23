@@ -34,7 +34,6 @@ const AddNewQuestionScreen = () =>{
     }
 
     const handleSaveData = () => {
-        console.log('handleData');
         const objectToSend = {
             date: new Date(),
             question: question,
@@ -42,20 +41,19 @@ const AddNewQuestionScreen = () =>{
             rightAnswerId: rightAnswerId,
             time: time,
         }
-        fetch('http://localhost:3001/addQuestion', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify(objectToSend)})
+        fetch('http://localhost:3002/addQuestion', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify(objectToSend)})
         .then(response => response.json())
-        .then(data => console.log(data.questions))
+        .then(res => setQuestionsToDisplay(questionsToDisplay.concat([{_id: res.id,...objectToSend}])))
         .catch(err => console.log("error:" +err))
     }
 
     const displayQuestions = () => {
-        console.log(questionsToDisplay);
-        if(questionsToDisplay.questions.length >0){
+        if(questionsToDisplay.length >0){
             return(
                 <>
-                    {questionsToDisplay.questions.map(question => {
+                    {questionsToDisplay.map(question => {
                         return(
-                            <p>{question?.question}</p>
+                            <p key={question._id}>{question?.question}</p>
                         )
                     })}
                 </>
@@ -64,15 +62,15 @@ const AddNewQuestionScreen = () =>{
     }
 
     const fetchQuestionsToDisplay = () => {
-        fetch('http://localhost:3001/dashboard/questions', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "GET", mode: "cors"})
+        fetch('http://localhost:3002/dashboard/questions', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "GET", mode: "cors"})
         .then(response => response.json())
-        .then(data => setQuestionsToDisplay(data))
+        .then(data =>setQuestionsToDisplay(data.questions))
         .catch(err => console.log("error:" +err))
     }
 
     useEffect(()=>{
         fetchQuestionsToDisplay();
-    }, [])
+    },[])
     return(
         <DashboardLayout>
             <p>AddNewQuestionScreen</p>

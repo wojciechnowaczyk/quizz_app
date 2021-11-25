@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import Button from '../../../../components/button';
+import styled from 'styled-components';
+import palette from '../../../../theme/colors';
 
 
 const UsersList = ({usersList, setUsersList}) => {
@@ -9,11 +11,13 @@ const UsersList = ({usersList, setUsersList}) => {
                 <>
                     {usersList.map(user => {
                         return(
-                            <div key={user._id}>
-                                <p >{user?.login}</p>
-                                <p >{user?.code}</p>
+                            <UserRow key={user._id}>
+                                <Field width={200}>{user?.login}</Field>
+                                <Field width={200}>{user?.code}</Field>
+                                <Field width={200}>{user?.name}</Field>
+                                <Field width={200}>{user?.surname}</Field>
                                 <Button onPress={()=>deleteUser(user._id)} title="Delete"/>
-                            </div>
+                            </UserRow>
                         )
                     })}
                 </>
@@ -45,10 +49,53 @@ const UsersList = ({usersList, setUsersList}) => {
         .catch(err => console.log("error:" +err))
     }
     return(
-        <>
+        <Box>
+            <UserRow>
+                <Label width={200}>Login</Label>
+                <Label width={200}>Code</Label>
+                <Label width={200}>Name</Label>
+                <Label width={200}>Surname</Label>
+            </UserRow>
             {displayList()}
-        </>
+        </Box>
     )
 }
+
+const Box = styled.div`
+    background-color: ${palette.white};
+    width: 90%;
+    padding: 5%;
+    border-radius: 20px;
+`
+
+const UserRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 20px;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid ${palette.cyan}
+`
+
+const Label = styled.div`
+    width: ${props => props.width}px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+`
+
+const Field = styled.div`
+    width: ${props => props.width}px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+`
 
 export default UsersList;

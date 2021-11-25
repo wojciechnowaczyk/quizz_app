@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../theme/colors';
 
-const Button = ({title, onPress}) => {
+const Button = ({title, onPress, children}) => {
     return(
         <StyledButton onClick={onPress}>
             {title}
+            {children}
         </StyledButton>
     )
 }
@@ -19,10 +20,7 @@ const StyledButton = styled.button`
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    background-color: ${palette.pippin};
-    -webkit-box-shadow: 4px 4px 10px 0px rgba(226, 149, 120, 1);
-    -moz-box-shadow: 4px 4px 10px 0px rgba(226, 149, 120, 1);
-    box-shadow: 4px 4px 10px 0px rgba(226, 149, 120, 1);
+    background-color: ${palette.aliceBlue};
 `
 
 export default Button;

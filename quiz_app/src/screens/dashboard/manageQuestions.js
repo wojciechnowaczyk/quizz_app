@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import DashboardLayout from '../components/dashboardLayout';
-import Button from '../components/button';
+import DashboardLayout from '../../components/dashboardLayout';
+import Button from '../../components/button';
 
-const AddNewQuestionScreen = () =>{
+const ManageQuestionsScreen = () =>{
     const [question, setQuestion] = useState("");
     const [answers, setAnswers] = useState([]);
     const [rightAnswerId, setRightAnswerId] = useState(null);
@@ -108,4 +108,4 @@ const AddNewQuestionScreen = () =>{
     )
 }
 
-export default AddNewQuestionScreen;
+export default ManageQuestionsScreen;

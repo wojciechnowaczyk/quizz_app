@@ -14,7 +14,7 @@ const Dashboard = () =>{
                     <Link style={StyledLink} to="./users">Manage useres</Link>
                 </Tile>
                 <Tile>
-                    <Link style={StyledLink} to="./add-new-question">Manage questions</Link>
+                    <Link style={StyledLink} to="./quizzes">Manage questions</Link>
                 </Tile>
             </ButtonsRow>
             <DashboardTitle title="Fullfield Quizzes" />

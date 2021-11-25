@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../theme/colors';
 
-const Button = ({title, onPress, children}) => {
+const Button = ({title, onPress, styles, children}) => {
     return(
-        <StyledButton onClick={onPress}>
+        <StyledButton style={styles} onClick={onPress}>
             {title}
             {children}
         </StyledButton>

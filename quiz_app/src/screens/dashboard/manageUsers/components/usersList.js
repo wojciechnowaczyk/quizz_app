@@ -46,7 +46,6 @@ const UsersList = ({usersList, setUsersList}) => {
     }
     return(
         <>
-            <p>Users List</p>
             {displayList()}
         </>
     )

@@ -21,7 +21,7 @@ const AddUserForm = ({usersList, setUsersList}) => {
         <>
             <InputWithLabel label="Login" id="loginField" onChange={setLogin}/>
             <InputWithLabel label="Code" id="codeField" onChange={setCode}/>
-            <Button title="Save" onPress={handleSaveData} />
+            <Button title="Save" onPress={handleSaveData} styles={{marginTop: 25}}/>
         </>
     )
 }

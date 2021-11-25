@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import DashboardLayout from '../../components/dashboardLayout';
-import Button from '../../components/button';
+import DashboardLayout from '../../../components/dashboardLayout';
+import Button from '../../../components/button';
+import DashboardTitle from '../../../components/dashboardTitle';
+import QuestionsList from './components/questionsList';
 
 const ManageQuestionsScreen = () =>{
+    useEffect(()=>{
+        fetchQuestionsToDisplay();
+    },[])
     const [question, setQuestion] = useState("");
     const [answers, setAnswers] = useState([]);
     const [rightAnswerId, setRightAnswerId] = useState(null);
@@ -32,6 +37,12 @@ const ManageQuestionsScreen = () =>{
         setRightAnswerId(event.target.value);
         event.preventDefault();
     }
+    const fetchQuestionsToDisplay = () => {
+        fetch('http://localhost:3002/dashboard/questions', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "GET", mode: "cors"})
+        .then(response => response.json())
+        .then(data =>setQuestionsToDisplay(data.questions))
+        .catch(err => console.log("error:" +err))
+    }
 
     const deleteQuestion = (id) => {
         fetch(`http://localhost:3002/dashboard/questions/${id}`, {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "DELETE", mode: "cors"})
@@ -60,36 +71,9 @@ const ManageQuestionsScreen = () =>{
         .catch(err => console.log("error:" +err))
     }
 
-    const displayQuestions = () => {
-        if(questionsToDisplay.length >0){
-            return(
-                <>
-                    {questionsToDisplay.map(question => {
-                        return(
-                            <div key={question._id}>
-                                <p >{question?.question}</p>
-                                <Button onPress={()=>deleteQuestion(question._id)} title="Delete"/>
-                            </div>
-                        )
-                    })}
-                </>
-            )
-        }
-    }
-
-    const fetchQuestionsToDisplay = () => {
-        fetch('http://localhost:3002/dashboard/questions', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "GET", mode: "cors"})
-        .then(response => response.json())
-        .then(data =>setQuestionsToDisplay(data.questions))
-        .catch(err => console.log("error:" +err))
-    }
-
-    useEffect(()=>{
-        fetchQuestionsToDisplay();
-    },[])
     return(
         <DashboardLayout>
-            <p>AddNewQuestionScreen</p>
+            <DashboardTitle title="Add a new question"/>
             <textarea id="question" name="question" value={question} onChange={handleSetQuestion}/>
             <input  id="answer1" name="answer1" onChange={(e)=>handleSetAnswer('answer1', e)}/>
             <input type="radio" id="answer1Radio" name="answer1Radio" value="answer1" onChange={handleRadioButton}/>
@@ -103,7 +87,8 @@ const ManageQuestionsScreen = () =>{
             <input  id="time" name="time" onChange={(e)=>setTime(e.target.value)}/>
             <br/>
             <Button onPress={handleSaveData} title="Save"/>
-            {displayQuestions()}
+            <DashboardTitle title="Manage questions"/>
+            <QuestionsList deleteQuestion={deleteQuestion} questionsToDisplay={questionsToDisplay}/>
         </DashboardLayout>
     )
 }

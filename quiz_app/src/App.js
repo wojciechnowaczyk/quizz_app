@@ -1,6 +1,5 @@
-import logo from './logo.svg';
+
 import './App.css';
-import MainScreen from "./screens/mainScreen";
 
 function App() {
   return (

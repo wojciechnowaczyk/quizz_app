@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import Dashboard from './screens/dashboard';
-import MainScreen from './screens/mainScreen';
+import MainScreen from './screens/quiz';
 import ManageUsersScreen from './screens/dashboard/manageUsers';
 import ManageQuestionsScreen from './screens/dashboard/manageQuestions';
 

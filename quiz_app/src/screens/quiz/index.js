@@ -27,8 +27,8 @@ const MainBox = styled.div`
 `
 
 const InnerBox = styled.div`
-    width: 800px;
-    height: 400px;
+    width: 900px;
+    min-height: 400px;
     background-color: rgba(0,0,0,0.6);
     border-radius: 20px;
     position: relative;

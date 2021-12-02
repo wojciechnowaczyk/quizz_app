@@ -1,18 +1,29 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Logotype from '../../assets/img/logo_expansio.png';
-
+import { UserContext } from '../../contexts/userContext';
 import palette from '../../theme/colors';
 import Question from './components/questions';
+import LoginBox from './components/loginBox';
 
 const  MainScreen = () => {
+    const [userToken, setUserToken] = useState('');
+    const [userId, setUserId] = useState('')
+    const value ={userToken, setUserToken, userId, setUserId};
+    useEffect(()=>{
+        console.log(userToken);
+        console.log(userId);
+    },[userToken])
     return (
+        <UserContext.Provider value={value}>
         <MainBox>
             <Logo src={Logotype}/>
             <InnerBox>
-                <Question />
+                {!userToken && <LoginBox />}
+                {userToken && <Question />}
             </InnerBox>
         </MainBox>
+        </UserContext.Provider>
     )
 }
 

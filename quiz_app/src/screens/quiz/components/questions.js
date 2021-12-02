@@ -1,13 +1,13 @@
 import React, {useEffect, useContext, useState} from 'react';
 import styled from 'styled-components';
-import { userContext } from '../../../contexts/userContext';
 import AnswerButton from '../../../components/answerButton';
 import palette from '../../../theme/colors';
 import InformationBox from '../../../components/informationBox';
 import Timer from '../../../components/timer';
+import { UserContext } from '../../../contexts/userContext';
 
 const Question = () => {
-    const user = useContext(userContext);
+    const user = useContext(UserContext)
     const [currentQuestion, setCurrentQuestion] = useState({});
     const [timeLeft, setTimeLeft] = useState(0);
     const fetchQuestion = (answerId) => {
@@ -20,8 +20,11 @@ const Question = () => {
         .catch(err => console.log(err))
     }
     useEffect(()=>{
-        fetchQuestion()
-    },[])
+        if(user.userId){
+            fetchQuestion()
+        }
+    },[user.userId])
+    //to uncomment when release
     // useEffect(() => {
     //     if(timeLeft === 0){
     //         fetchQuestion('none');

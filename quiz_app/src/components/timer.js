@@ -4,7 +4,6 @@ import palette from '../theme/colors';
 
 const Timer = ({timeLeft, setTimeLeft}) => {
     const countDown = () => {
-        console.log(timeLeft);
         if(timeLeft > 0){
             setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
         }

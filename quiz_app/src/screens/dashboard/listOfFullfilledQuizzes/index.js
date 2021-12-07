@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import palette from '../../../theme/colors';
 import Button from '../../../components/button';
+import { Link } from "react-router-dom";
 
 const ListOfFullfilledQuizzes = () => {
     const [listOfQuizzes, setListOfQuizzes] = useState([])
@@ -27,7 +28,9 @@ const ListOfFullfilledQuizzes = () => {
                         <Field width={100}>-</Field>
                         <Field width={300}>{quiz.correctAmount}/{quiz.totalAmount}</Field>
                         <Field width={100}>
-                            <Button title="See more" />
+                            <Button>
+                                <Link to={`/dashboard/user=${quiz.userId}`}>See More</Link>
+                            </Button>
                         </Field>
                     </UserRow>
                 )

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../components/dashboardLayout';
 import DashboardTitle from '../components/dashboardTitle';
+import ListOfFullfilledQuizzes from './dashboard/listOfFullfilledQuizzes';
 import styled from 'styled-components';
 import palette from '../theme/colors';
 
@@ -18,6 +19,7 @@ const Dashboard = () =>{
                 </Tile>
             </ButtonsRow>
             <DashboardTitle title="Fullfield Quizzes" />
+            <ListOfFullfilledQuizzes />
         </DashboardLayout>
     )
 }

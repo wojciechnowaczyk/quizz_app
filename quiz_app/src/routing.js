@@ -13,7 +13,7 @@ function Navigation() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/users" element={<ManageUsersScreen />} />
           <Route path="/dashboard/quizzes" element={<ManageQuestionsScreen />} />
-          <Route path="/dashboard/user/:userId" element={<UserPage/>}/>
+          <Route path="/dashboard/user=:userId" element={<UserPage/>}/>
         </Routes>
     );
   }

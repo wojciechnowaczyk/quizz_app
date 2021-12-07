@@ -16,10 +16,6 @@ const ListOfFullfilledQuizzes = () => {
         fetchListOfQuizzes();
     },[])
 
-    const handleSeeMoreButton = () => {
-
-    }
-
     const displayListOfQuizzes = () => {
         console.log(listOfQuizzes);
         if(listOfQuizzes.length > 0){
@@ -33,7 +29,7 @@ const ListOfFullfilledQuizzes = () => {
                         <Field width={300}>{quiz.correctAmount}/{quiz.totalAmount}</Field>
                         <Field width={100}>
                             <Button>
-                                <Link to={`/dashboard/user/${quiz.userId}`}>See More</Link>
+                                <Link to={`/dashboard/user=${quiz.userId}`}>See More</Link>
                             </Button>
                         </Field>
                     </UserRow>

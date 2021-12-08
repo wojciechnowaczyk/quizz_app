@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import Navigation from './routing';
+import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Navigation />
-      <App />
-    </BrowserRouter>
+    <CookiesProvider>
+      <BrowserRouter>
+        <Navigation />
+        <App />
+      </BrowserRouter>
+    </CookiesProvider>
   </React.StrictMode>
   ,
   document.getElementById('root')

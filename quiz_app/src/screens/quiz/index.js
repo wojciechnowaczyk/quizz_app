@@ -1,19 +1,22 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Logotype from '../../assets/img/logo_expansio.png';
 import { UserContext } from '../../contexts/userContext';
+import { useCookies } from 'react-cookie';
 import palette from '../../theme/colors';
 import Question from './components/questions';
 import LoginBox from './components/loginBox';
 
 const  MainScreen = () => {
     const [userToken, setUserToken] = useState('');
-    const [userId, setUserId] = useState('')
+    const [userId, setUserId] = useState('');
+    const [cookies, setCookie] = useCookies();
     const value ={userToken, setUserToken, userId, setUserId};
     useEffect(()=>{
-        console.log(userToken);
-        console.log(userId);
-    },[userToken])
+        if(cookies?.userToken){
+            setUserToken(cookies.userToken)
+        }
+    },[userToken, cookies])
     return (
         <UserContext.Provider value={value}>
         <MainBox>

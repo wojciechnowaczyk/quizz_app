@@ -11,11 +11,13 @@ const Question = () => {
     const [currentQuestion, setCurrentQuestion] = useState({});
     const [timeLeft, setTimeLeft] = useState(0);
     const fetchQuestion = (answerId) => {
-        fetch('http://localhost:3002/getQuestion', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify({userId: user.userId, answerId: answerId, questionId: currentQuestion._id, timeLeft: timeLeft})})
+        fetch('http://localhost:3002/getQuestion', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify({token: user?.userToken, userId: user?.userId, answerId: answerId, questionId: currentQuestion?._id, timeLeft: timeLeft})})
         .then(response => response.json())
         .then(res => {
-            setCurrentQuestion(res.question);
-            setTimeLeft(res.question.time);
+            if(res.question){
+                setCurrentQuestion(res.question);
+                setTimeLeft(res.question.time);
+            }
         })
         .catch(err => console.log(err))
     }

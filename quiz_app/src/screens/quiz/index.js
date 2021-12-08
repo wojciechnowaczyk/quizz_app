@@ -6,26 +6,37 @@ import { useCookies } from 'react-cookie';
 import palette from '../../theme/colors';
 import Question from './components/questions';
 import LoginBox from './components/loginBox';
+import Button from '../../components/button';
 
 const  MainScreen = () => {
     const [userToken, setUserToken] = useState('');
     const [userId, setUserId] = useState('');
-    const [cookies, setCookie] = useCookies();
+    const [cookies, setCookie, removeCookie] = useCookies();
     const value ={userToken, setUserToken, userId, setUserId};
     useEffect(()=>{
         if(cookies?.userToken){
             setUserToken(cookies.userToken)
         }
+        if(cookies?.userId){
+            setUserId(cookies.userId)
+        }
     },[userToken, cookies])
+    const logout = () => {
+        setUserToken(null);
+        setUserId(null);
+        removeCookie("userToken");
+        removeCookie("userId");
+    }
     return (
         <UserContext.Provider value={value}>
-        <MainBox>
-            <Logo src={Logotype}/>
-            <InnerBox>
-                {!userToken && <LoginBox />}
-                {userToken && <Question />}
-            </InnerBox>
-        </MainBox>
+            <MainBox>
+                <Logo src={Logotype}/>
+                {cookies.userToken && <Button title="Logout" styles={buttonStyles} onPress={logout}/>}
+                <InnerBox>
+                    {!userToken && <LoginBox />}
+                    {userToken && <Question />}
+                </InnerBox>
+            </MainBox>
         </UserContext.Provider>
     )
 }
@@ -55,4 +66,10 @@ const Logo = styled.img`
     top: 20px;
     left: 20px;
 `
+
+const buttonStyles={
+    position: "absolute",
+    top: "20px",
+    right: "20px"
+}
 export default MainScreen;

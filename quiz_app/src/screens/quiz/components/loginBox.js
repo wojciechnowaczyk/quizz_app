@@ -9,18 +9,18 @@ const LoginBox = () => {
     const [code, setCode] = useState();
     const [cookies, setCookie] = useCookies();
     const user = useContext(UserContext);
-    const setUserCookie = (userToken) => {
-        setCookie('userToken', userToken, {path: '/', maxAge: 360})
+    const setUserCookie = (userToken, userId) => {
+        setCookie('userToken', userToken, {path: '/', maxAge: 360});
+        setCookie('userId', userId, {path: '/', maxAge: 360})
     };
     const handleSubmit = () => {
         fetch('http://localhost:3002/userLogin', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify({login: login, code: code, date: new Date()})})
         .then(res => res.json())
         .then(resp => {
-            console.log(resp);
             if(resp.userToken && resp.userId){
                 user.setUserToken(resp.userToken);
                 user.setUserId(resp.userId);
-                setUserCookie(resp.userToken);
+                setUserCookie(resp.userToken, resp.userId);
             }
         })
         .catch(err => console.log(err))

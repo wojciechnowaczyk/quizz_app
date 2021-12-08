@@ -5,11 +5,13 @@ import palette from '../../../theme/colors';
 import InformationBox from '../../../components/informationBox';
 import Timer from '../../../components/timer';
 import { UserContext } from '../../../contexts/userContext';
+import { useCookies } from 'react-cookie';
 
 const Question = () => {
     const user = useContext(UserContext)
     const [currentQuestion, setCurrentQuestion] = useState({});
     const [timeLeft, setTimeLeft] = useState(0);
+    const [cookies, setCookie] = useCookies();
     const fetchQuestion = (answerId) => {
         fetch('http://localhost:3002/getQuestion', {headers:{"Content-Type": "application/json", "Access-Control-Allow-Origin" : "*"},method: "POST", mode: "cors", body: JSON.stringify({token: user?.userToken, userId: user?.userId, answerId: answerId, questionId: currentQuestion?._id, timeLeft: timeLeft})})
         .then(response => response.json())
@@ -17,15 +19,17 @@ const Question = () => {
             if(res.question){
                 setCurrentQuestion(res.question);
                 setTimeLeft(res.question.time);
+            }else if(res.question === null){
+                setCurrentQuestion(res.question);
             }
         })
         .catch(err => console.log(err))
     }
     useEffect(()=>{
-        if(user.userId){
+        if((user.userId && user.userToken) || (cookies.userId && cookies.userToken)){
             fetchQuestion()
         }
-    },[user.userId])
+    },[user, cookies, currentQuestion])
     //to uncomment when release
     // useEffect(() => {
     //     if(timeLeft === 0){

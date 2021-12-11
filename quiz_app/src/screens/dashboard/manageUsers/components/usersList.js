@@ -12,8 +12,7 @@ const UsersList = ({usersList, setUsersList}) => {
                     {usersList.map(user => {
                         return(
                             <UserRow key={user._id}>
-                                <Field width={200}>{user?.login}</Field>
-                                <Field width={200}>{user?.code}</Field>
+                                <Field width={400}>{user?.login}</Field>
                                 <Field width={200}>{user?.name}</Field>
                                 <Field width={200}>{user?.surname}</Field>
                                 <Button onPress={()=>deleteUser(user._id)} title="Delete"/>
@@ -51,8 +50,7 @@ const UsersList = ({usersList, setUsersList}) => {
     return(
         <Box>
             <UserRow>
-                <Label width={200}>Login</Label>
-                <Label width={200}>Code</Label>
+                <Label width={400}>Login</Label>
                 <Label width={200}>Name</Label>
                 <Label width={200}>Surname</Label>
             </UserRow>

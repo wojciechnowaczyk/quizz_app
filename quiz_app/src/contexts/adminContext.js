@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const UserContext = React.createContext({userId: '', setUserId: () => {}, userToken: '' , setUserToken: () => {}});
+export const AdminContext = React.createContext({adminId: '', setAdminId: () => {}, adminToken: '' , setAdminToken: () => {}});

@@ -1,25 +1,51 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../components/dashboardLayout';
 import DashboardTitle from '../components/dashboardTitle';
 import ListOfFullfilledQuizzes from './dashboard/listOfFullfilledQuizzes';
 import styled from 'styled-components';
 import palette from '../theme/colors';
+import { useCookies } from 'react-cookie';
+import LoginBox from './dashboard/loginBox';
 
 const Dashboard = () =>{
+    const [adminToken, setAdminToken] = useState('');
+    const [adminId, setAdminId] = useState('');
+    const [cookies, setCookie, removeCookie] = useCookies();
+    const value ={adminToken, setAdminToken, adminId, setAdminId};
+    useEffect(()=>{
+        console.log(cookies);
+        if(cookies?.adminToken){
+            setAdminToken(cookies.adminToken)
+        }
+        if(cookies?.adminId){
+            setAdminId(cookies.userId)
+        }
+    },[adminToken, cookies])
+    const logout = () => {
+        setAdminToken(null);
+        setAdminId(null);
+        removeCookie("adminToken");
+        removeCookie("adminId");
+    }
     return(
         <DashboardLayout>
-            <DashboardTitle title="Dashboard" />
-            <ButtonsRow>
-                <Tile>
-                    <Link style={StyledLink} to="./users">Manage useres</Link>
-                </Tile>
-                <Tile>
-                    <Link style={StyledLink} to="./quizzes">Manage questions</Link>
-                </Tile>
-            </ButtonsRow>
-            <DashboardTitle title="Fullfield Quizzes" />
-            <ListOfFullfilledQuizzes />
+            {cookies.adminToken && cookies.adminId && 
+                <>
+                    <DashboardTitle title="Dashboard" />
+                    <ButtonsRow>
+                        <Tile>
+                            <Link style={StyledLink} to="./users">Manage useres</Link>
+                        </Tile>
+                        <Tile>
+                            <Link style={StyledLink} to="./quizzes">Manage questions</Link>
+                        </Tile>
+                    </ButtonsRow>
+                    <DashboardTitle title="Fullfield Quizzes" />
+                    <ListOfFullfilledQuizzes />
+                </>
+            }
+            {!adminToken && !adminId && <LoginBox />}
         </DashboardLayout>
     )
 }

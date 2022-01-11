@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import palette from '../theme/colors';
 
 const Dashboard = () =>{
-    return(
+    return(                   
         <DashboardLayout>
             <DashboardTitle title="Dashboard" />
             <ButtonsRow>

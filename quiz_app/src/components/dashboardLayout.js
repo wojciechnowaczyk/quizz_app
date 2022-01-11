@@ -1,39 +1,23 @@
 import React from 'react';
+import SideBar from './sideBar';
 import styled from 'styled-components';
 import palette from "../theme/colors";
-import Button from './button';
-
-import LogotypeImg from '../assets/img/logo_expansio.png';
 
 const DashboardLayout = ({children}) => {
     return(
-        <div>
-            <MainContainer>
-                <Logotype src={LogotypeImg}/>
-                <Button title="Logout" />
-            </MainContainer>
-            <BodyContainer>
-                <ContentBox>
-                    {children}
-                </ContentBox>
-            </BodyContainer>
-        </div>
+        <>
+            <SideBar/>
+            <OuterBox>
+                <BodyContainer>
+                    <ContentBox>
+                        {children}
+                    </ContentBox>
+                </BodyContainer>
+            </OuterBox>
+        </>
     )
 }
 
-const MainContainer = styled.div`
-    width: 90%;
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 5%;
-    padding-right: 5%;
-`
-
-const Logotype = styled.img`
-    width: 200px;
-`
 
 const BodyContainer  = styled.div`
     width: 80%;
@@ -53,5 +37,9 @@ const ContentBox = styled.div`
     height: fit-content;
     padding: 5%;
     border-radius: 50px;
+`
+
+const OuterBox = styled.div`
+    margin-left: 250px;
 `
 export default DashboardLayout;

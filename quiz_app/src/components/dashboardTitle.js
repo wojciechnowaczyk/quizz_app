@@ -11,7 +11,7 @@ const DashboardTitle = ({title}) => {
 const Title = styled.h1`
     font-family: 'Montserrat', sans-serif;
     font-size: 40px;
-    color: ${palette.cyan}
+    color: ${palette.matisse}
 `
 
 export default DashboardTitle;

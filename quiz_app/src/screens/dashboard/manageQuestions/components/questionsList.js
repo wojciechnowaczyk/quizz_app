@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../../../../components/button';
 import palette from '../../../../theme/colors';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock} from "@fortawesome/free-solid-svg-icons";
 
 const QuestionsList = ({deleteQuestion, questionsToDisplay}) => {
     const displayQuestions = () => {
@@ -11,14 +13,17 @@ const QuestionsList = ({deleteQuestion, questionsToDisplay}) => {
                     {questionsToDisplay.map(question => {
                         return(
                             <QuestionBox key={question._id}>
-                                <Label>Question: {question?.question}</Label>
-                                <Label>Answers:</Label> {question?.answers.map((answer) => {
+                                <QuestionHeader>{question?.question}</QuestionHeader>
+                                <Label>
+                                    <FontAwesomeIcon icon={faClock}/>
+                                    Time: {question?.time}s
+                                </Label>
+                                {question?.answers.map((answer) => {
                                     return (
                                         <Answer correct={answer?.id === question?.rightAnswerId}>{answer?.answer}<br/></Answer>
                                     )
                                 })}
-                                <Label>Time: {question?.time}s</Label>
-                                <Button onPress={()=>deleteQuestion(question._id)} title="Delete Question"/>
+                                <Button onPress={()=>deleteQuestion(question._id)} title="Delete Question" styles={{marginTop: '20px'}}/>
                             </QuestionBox>
                         )
                     })}
@@ -36,27 +41,27 @@ const QuestionsList = ({deleteQuestion, questionsToDisplay}) => {
 const Box = styled.div`
     background-color: ${palette.white};
     width: 95%;
-    padding: 2.5%;
     border-radius: 20px;
+    margin-top: 60px;
 `
 
 const QuestionBox = styled.div`
     border-radius: 20px;
-    border: 1px solid ${palette.cyan};
-    padding: 30px;
     box-sizing: border-box;
-    margin-bottom: 30px;
+    margin-bottom: 140px;
 `
 
 const Answer = styled.div`
-    border: 1px solid black;
+    border: 1px solid ${palette.matisse};
+    color: ${palette.matisse};
     border-radius: 20px;
     height: 20px;
     font-family: "Lato";
+    font-weight: bold;
     padding:10px;
     margin-bottom: 10px;
     margin-top: 10px;
-    background-color: ${props => props.correct ? "green" : palette.white}
+    background-color: ${props => props.correct ? palette.shadowLime : palette.white}
 `
 
 
@@ -67,7 +72,20 @@ const Label = styled.div`
     align-items: center;
     font-family: 'Lato', sans-serif;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 20px;
+    color: ${palette.matisse};
+    & > svg {
+        margin-right: 15px;
+    };
+    margin-bottom: 20px;
+`
+
+const QuestionHeader = styled.h2`
+    width: 100%;
+    margin-bottom: 25px;
+    border-bottom: 2px solid ${palette.bondiBlue};
+    padding-bottom: 5px;
+    color: ${palette.matisse}
 `
 
 export default QuestionsList;

@@ -4,15 +4,21 @@ import Button from '../../../../components/button';
 import palette from '../../../../theme/colors';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock} from "@fortawesome/free-solid-svg-icons";
+import questionsMocks from '../../../../mocks/questionsList.json';
 
 const QuestionsList = ({deleteQuestion, questionsToDisplay}) => {
+    console.log(questionsMocks);
     const displayQuestions = () => {
-        if(questionsToDisplay.length >0){
+        if(questionsMocks.length >0){
             return(
                 <>
-                    {questionsToDisplay.map(question => {
+                    {questionsMocks.map(question => {
+                        console.log(question);
+                        console.log(question._id);
+                        console.log(question.question);
+                        console.log(question.answers);
                         return(
-                            <QuestionBox key={question._id}>
+                            <QuestionBox key={question?._id}>
                                 <QuestionHeader>{question?.question}</QuestionHeader>
                                 <Label>
                                     <FontAwesomeIcon icon={faClock}/>

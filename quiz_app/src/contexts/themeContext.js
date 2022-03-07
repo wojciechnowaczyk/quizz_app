@@ -6,11 +6,9 @@ const ThemeContext = React.createContext({
 });
 
 const CustomThemeProvider = ({ children }) => {
-  const [theme, setTheme] = React.useState("dark");
+  const [theme, setTheme] = React.useState("light");
 
   const toggleTheme = () => {
-    console.log("toggleTheme");
-
     setTheme(theme === "light" ? "dark" : "light");
   };
 

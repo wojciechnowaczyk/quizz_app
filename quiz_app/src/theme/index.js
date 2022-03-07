@@ -12,6 +12,9 @@ const themeMode = (mode) => ({
           background: {
             default: "#000",
           },
+          primary: {
+            main: "#ffffff",
+          },
         }),
   },
 });

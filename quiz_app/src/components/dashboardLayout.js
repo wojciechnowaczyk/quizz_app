@@ -16,7 +16,6 @@ const DashboardLayout = ({ children }) => {
 };
 
 const BodyContainer = styled.div`
-  width: 80%;
   min-height: 85vh;
   padding-left: 10%;
   padding-right: 10%;

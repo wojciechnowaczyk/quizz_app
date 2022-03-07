@@ -8,7 +8,6 @@ import Dashboard from "@mui/icons-material/Dashboard";
 import Group from "@mui/icons-material/Group";
 import QuestionMark from "@mui/icons-material/QuestionMark";
 import Logout from "@mui/icons-material/Logout";
-import palette from "../theme/colors";
 import { ButtonBase } from "@mui/material";
 import Typography from "@mui/material/Typography";
 

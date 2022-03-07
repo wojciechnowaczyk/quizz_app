@@ -1,17 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import palette from '../theme/colors';
+import React from "react";
+import styled from "styled-components";
+import palette from "../theme/colors";
+import { Typography } from "@mui/material";
 
-const DashboardTitle = ({title}) => {
-    return(
-        <Title>{title}</Title>
-    )
-}
-
-const Title = styled.h1`
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    color: ${palette.matisse}
-`
+const DashboardTitle = ({ title }) => {
+  return <Typography variant="h1">{title}</Typography>;
+};
 
 export default DashboardTitle;

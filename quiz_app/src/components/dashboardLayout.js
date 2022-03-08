@@ -34,5 +34,6 @@ const ContentBox = styled.div`
 
 const OuterBox = styled.div`
   margin-left: 250px;
+  padding-top: 60px;
 `;
 export default DashboardLayout;

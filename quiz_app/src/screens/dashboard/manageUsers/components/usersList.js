@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import palette from "../../../../theme/colors";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -43,7 +41,6 @@ const UsersList = ({ setUsersList }) => {
   };
 
   const deleteUser = (id) => {
-    console.log(id);
     fetch(`http://localhost:3002/dashboard/users/${id}`, {
       headers: {
         "Content-Type": "application/json",

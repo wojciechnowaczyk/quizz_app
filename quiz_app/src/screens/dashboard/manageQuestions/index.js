@@ -4,8 +4,6 @@ import Button from "../../../components/button";
 import DashboardTitle from "../../../components/dashboardTitle";
 import QuestionsList from "./components/questionsList";
 import InputWithLabel from "../../../components/inputWithLabel";
-import TextareaWithLabel from "../../../components/textareaWithLabel";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Radio from "@mui/material/Radio";
 import styled from "styled-components";

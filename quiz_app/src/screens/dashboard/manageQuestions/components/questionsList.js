@@ -1,9 +1,5 @@
 import React from "react";
-import styled from "styled-components";
 import Button from "../../../../components/button";
-import palette from "../../../../theme/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
 import questionsMocks from "../../../../mocks/questionsList.json";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -60,20 +56,5 @@ const QuestionsList = ({ deleteQuestion, questionsToDisplay }) => {
   };
   return <Box>{displayQuestions()}</Box>;
 };
-
-const Label = styled.div`
-  width: ${(props) => props.width}px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  font-family: "Lato", sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  color: ${palette.matisse};
-  & > svg {
-    margin-right: 15px;
-  }
-  margin-bottom: 20px;
-`;
 
 export default QuestionsList;

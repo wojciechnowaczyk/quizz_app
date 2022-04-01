@@ -1,26 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import palette from '../theme/colors';
+import React from "react";
+import Button from "@mui/material/Button";
 
-const Button = ({title, onPress, styles, children}) => {
-    return(
-        <StyledButton style={styles} onClick={onPress}>
-            {title}
-            {children}
-        </StyledButton>
-    )
-}
+const CustomButton = ({ title, onPress, styles, children }) => {
+  return (
+    <Button variant="contained" onClick={onPress} style={styles}>
+      {title}
+      {children}
+    </Button>
+  );
+};
 
-const StyledButton = styled.button`
-    width: 100px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    background-color: ${palette.aliceBlue};
-`
-
-export default Button;
+export default CustomButton;

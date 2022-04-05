@@ -9,7 +9,8 @@ const ManageUsersScreen = () => {
   return (
     <DashboardLayout>
       <DashboardTitle title="Manage users" />
-      <UsersList usersList={usersList} setUsersList={setUsersList} />
+      {/* <UsersList usersList={usersList} setUsersList={setUsersList} /> */}
+      <UsersList />
       <DashboardTitle title="Add a new user" />
       <AddUserForm usersList={usersList} setUsersList={setUsersList} />
     </DashboardLayout>

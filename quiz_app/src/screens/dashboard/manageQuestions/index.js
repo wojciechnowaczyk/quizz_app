@@ -7,8 +7,16 @@ import InputWithLabel from "../../../components/inputWithLabel";
 import TextField from "@mui/material/TextField";
 import Radio from "@mui/material/Radio";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getQuestionsRequest,
+  createQuestionRequest,
+  deleteQuestionRequest,
+} from "../../../store/actions/questions";
 
 const ManageQuestionsScreen = () => {
+  const dispatch = useDispatch();
+  const questionsToDisplay = useSelector((state) => state.questions.items);
   useEffect(() => {
     fetchQuestionsToDisplay();
   }, []);
@@ -16,7 +24,6 @@ const ManageQuestionsScreen = () => {
   const [answers, setAnswers] = useState([]);
   const [rightAnswerId, setRightAnswerId] = useState(null);
   const [time, setTime] = useState(0);
-  const [questionsToDisplay, setQuestionsToDisplay] = useState([]);
   const handleSetQuestion = (event) => {
     setQuestion(event.target.value);
     event.preventDefault();
@@ -41,63 +48,19 @@ const ManageQuestionsScreen = () => {
     setRightAnswerId(event.target.value);
   };
   const fetchQuestionsToDisplay = () => {
-    fetch("http://localhost:3002/dashboard/questions", {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      method: "GET",
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((data) => setQuestionsToDisplay(data.questions))
-      .catch((err) => console.log("error:" + err));
-  };
-
-  const deleteQuestion = (id) => {
-    fetch(`http://localhost:3002/dashboard/questions/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      method: "DELETE",
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        const index = questionsToDisplay.findIndex((el) => el._id === res._id);
-        const newArr1 = questionsToDisplay.slice(0, index);
-        const newArr2 = questionsToDisplay.slice(index + 1);
-        const newArr = newArr1.concat(newArr2);
-        setQuestionsToDisplay(newArr);
-      })
-      .catch((err) => console.log("error:" + err));
+    dispatch(getQuestionsRequest());
   };
 
   const handleSaveData = () => {
-    const objectToSend = {
-      date: new Date(),
-      question: question,
-      answers: answers,
-      rightAnswerId: rightAnswerId,
-      time: time,
-    };
-    fetch("http://localhost:3002/addQuestion", {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(objectToSend),
-    })
-      .then((response) => response.json())
-      .then((res) =>
-        setQuestionsToDisplay(
-          questionsToDisplay.concat([{ _id: res.id, ...objectToSend }])
-        )
-      )
-      .catch((err) => console.log("error:" + err));
+    dispatch(
+      createQuestionRequest({
+        date: new Date(),
+        question: question,
+        answers: answers,
+        rightAnswerId: rightAnswerId,
+        time: time,
+      })
+    );
   };
 
   return (
@@ -192,7 +155,9 @@ const ManageQuestionsScreen = () => {
       />
       <DashboardTitle title="Manage questions" />
       <QuestionsList
-        deleteQuestion={deleteQuestion}
+        deleteQuestion={(id) =>
+          dispatch(deleteQuestionRequest({ questionId: id }))
+        }
         questionsToDisplay={questionsToDisplay}
       />
     </DashboardLayout>

@@ -6,10 +6,10 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ContactMail from "@mui/icons-material/ContactMail";
-import usersList from "../../../../mocks/usersList.json";
+// import usersList from "../../../../mocks/usersList.json";
 
-// const UsersList = ({usersList, setUsersList}) => {
-const UsersList = ({ setUsersList }) => {
+const UsersList = ({ usersList, setUsersList }) => {
+  // const UsersList = ({ setUsersList }) => {
   const displayList = () => {
     if (usersList.length > 0) {
       return (

@@ -7,10 +7,10 @@ import Typography from "@mui/material/Typography";
 const QuestionsList = ({ deleteQuestion, questionsToDisplay }) => {
   console.log(questionsMocks);
   const displayQuestions = () => {
-    if (questionsMocks.length > 0) {
+    if (questionsToDisplay.length > 0) {
       return (
         <>
-          {questionsMocks.map((question) => {
+          {questionsToDisplay.map((question) => {
             return (
               <Box key={question?._id}>
                 <Typography

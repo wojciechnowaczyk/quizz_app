@@ -16,3 +16,7 @@ export const createUser = ({ date, login, name, surname }) => {
     surname: surname,
   });
 };
+
+export const deleteUser = (userId) => {
+  return axios.delete(`/dashboard/users/${userId}`);
+};

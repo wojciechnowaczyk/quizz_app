@@ -8,7 +8,10 @@ import Typography from "@mui/material/Typography";
 import ContactMail from "@mui/icons-material/ContactMail";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getUsersRequest } from "../../../../store/actions/users";
+import {
+  getUsersRequest,
+  deleteUserRequest,
+} from "../../../../store/actions/users";
 
 const UsersList = () => {
   const usersList = useSelector((state) => state.users.items);
@@ -31,9 +34,14 @@ const UsersList = () => {
                 </CardContent>
                 <CardActions>
                   <Button size="small">See more</Button>
-                  {/* <Button size="small" onClick={() => deleteUser(user?._id)}>
+                  <Button
+                    size="small"
+                    onClick={() =>
+                      dispatch(deleteUserRequest({ userId: user?._id }))
+                    }
+                  >
                     Delete user
-                  </Button> */}
+                  </Button>
                 </CardActions>
               </Card>
             );
@@ -42,26 +50,6 @@ const UsersList = () => {
       );
     }
   };
-
-  // const deleteUser = (id) => {
-  //   fetch(`http://localhost:3002/dashboard/users/${id}`, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Access-Control-Allow-Origin": "*",
-  //     },
-  //     method: "DELETE",
-  //     mode: "cors",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((res) => {
-  //       const index = usersList.findIndex((el) => el._id === res._id);
-  //       const newArr1 = usersList.slice(0, index);
-  //       const newArr2 = usersList.slice(index + 1);
-  //       const newArr = newArr1.concat(newArr2);
-  //       setUsersList(newArr);
-  //     })
-  //     .catch((err) => console.log("error:" + err));
-  // };
   useEffect(() => {
     fetchUsersToDisplay();
   }, []);

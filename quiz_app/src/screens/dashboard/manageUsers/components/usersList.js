@@ -9,10 +9,8 @@ import ContactMail from "@mui/icons-material/ContactMail";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getUsersRequest } from "../../../../store/actions/users";
-// import usersList from "../../../../mocks/usersList.json";
 
 const UsersList = () => {
-  // const UsersList = ({ setUsersList }) => {
   const usersList = useSelector((state) => state.users.items);
   const dispatch = useDispatch();
   const displayList = () => {

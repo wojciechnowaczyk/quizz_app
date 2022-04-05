@@ -7,3 +7,12 @@ export const getUsers = () => {
     },
   });
 };
+
+export const createUser = ({ date, login, name, surname }) => {
+  return axios.post("/dashboard/addUser", {
+    date: date,
+    login: login,
+    name: name,
+    surname: surname,
+  });
+};
